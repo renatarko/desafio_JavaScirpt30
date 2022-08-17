@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relógio</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Rubik+Dirt&display=swap" rel="stylesheet">
+</head>
+<style>
+    html {
+        background-color: rgba(144, 144, 218, 0.87);
+        font-family: 'Poppins', sans-serif;
+        text-align: center;
+        font-size: 10px;
+    }
+    body {
+        display: flex;
+        flex: 1;
+        min-height: 100vh;
+        align-items: center;
+        font-size: 2rem;
+    }
+    .clock {
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid #fff;
+        border-radius: 50%;
+        margin: 50px auto;
+        position: relative;
+        padding: 2rem;
+        box-shadow: 0 0 5px 7px rgba(144, 144, 218, 0.87);
+    }
+    .clock-face{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform: translateY(-3px);
+        
+    }
+    .hand {
+        width: 50%;
+        height: 6px;
+        background-color: rgb(100, 101, 102);
+        position: absolute;
+        top: 50%;
+        box-shadow: 0 0 5px 1px rgba(144, 144, 218, 0.87);
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.04s;
+        transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+
+    .second-hand {
+        height: 3px;
+    }
+    
+</style>
+
+<body>
+    <div class="clock">
+        <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const secondHand = document.querySelector('.second-hand')
+    const minHand = document.querySelector('.min-hand')
+    const hourHand = document.querySelector('.hour-hand')
+
+    function setDate(){
+        const now = new Date()
+
+        const seconds = now.getSeconds()
+        const secondsDegrees = ((seconds / 60) * 360 + 90)
+        secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+        
+        const min = now.getMinutes()
+        const minDegrees = ((min / 60) * 360 + 90)
+        minHand.style.transform = `rotate(${minDegrees}deg)`
+        console.log(min)
+
+        const hour = now.getHours()
+        const hourDregrees = ((hour / 60) * 360 + 90)
+        hourHand.style.transform = `rotate(${hourDregrees}deg)`
+    }
+    setInterval(setDate, 1000)
+</script>
+</html>
