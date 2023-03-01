@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=h2, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        :root {
+            --base: #ffc600;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+        img {
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        .h1 {
+            color: var(--base);
+        }
+
+        body {
+            text-align: center;
+            width: 100vw;
+            height: 100vh;
+        }
+        body {
+            background: #195549;
+            color: #fff;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 20px;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <h2>Update CSS Variables with <span class="h1">JS</span></h2>
+
+    <div class="controls">
+        <label for="spacing">Espaçamento:</label>
+        <input type="range" class="range" name="spacing" id="spacing" min="10" max="90" value="10" data-sizing="px">
+
+        <label for="blur">Desfoque:</label>
+        <input type="range" class="range" name="blur" id="blur" min="0" max="25" value="10" data-sizing="px">
+    
+        <label for="color">Cor:</label>
+        <input type="color" name="base" value="#ffc600">
+    </div>
+    <img src="https://source.unsplash.com/random" alt="foto" width="400px" height="300px">
+</body>
+<script>
+    const inputs = document.querySelectorAll('.controls input')
+    console.log(inputs)
+
+    function handleUpDate () {
+        const px = this.dataset.sizing || ""
+        document.documentElement.style.setProperty(`--${this.name}`, this.value + px)
+        console.log(px)
+    }
+
+    inputs.forEach(input => input.addEventListener('change', handleUpDate))
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpDate))
+    console.log(inputs)
+</script>
+</html>
