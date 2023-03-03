@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista telefonica</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 1rem;
+        background-color: #f4f4f4;
+      }
+
+      form {
+        padding: 1rem;
+      }
+
+      ul {
+        height: 10rem;
+        margin-top: 1.5rem;
+        overflow-y: scroll;
+      }
+
+      #pesquisar {
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Lista Telefônica</h2>
+
+    <form action="">
+      <label for="">Nome</label>
+      <input type="text" name="nome" id="nome" />
+      <label for="">Telefone</label>
+      <input type="tel" name="tel" id="telefone" />
+      <input type="submit" value="Salvar" />
+
+      <p></p>
+    </form>
+
+    <label for="">Pesquisar Contato:</label>
+    <input type="text" name="pesquisar" id="pesquisar" />
+
+    <ul></ul>
+  </body>
+  <script src="/main.js"></script>
+</html>
