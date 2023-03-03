@@ -1,5 +1,5 @@
 const form = document.querySelector("form");
-// const send = document.querySelector("button");
+const buscarContatos = document.querySelector("#meusContatos");
 let p = document.querySelector("p");
 
 let contatos = localStorage.getItem("meusContatos");
@@ -16,6 +16,8 @@ form.addEventListener("submit", (event) => {
 
   let nome = document.getElementById("nome").value.toLowerCase();
   let tel = document.getElementById("telefone").value;
+
+  p.innerHTML = "";
 
   if (!nome || !tel != "") {
     p.setAttribute("style", "color: red; margin-top: 1rem");
@@ -41,15 +43,12 @@ form.addEventListener("submit", (event) => {
   p.setAttribute("style", "color: green; margin-top: 1rem");
   p.innerHTML = "Contato Salvo";
 
-  nome = "";
-  tel = "";
-
   localStorage.setItem("meusContatos", JSON.stringify(contatos));
+
+  criarListaDeContatos();
 
   // localStorage.clear();
 });
-
-criarListaDeContatos();
 
 function ordemAlfabetica() {
   contatos.sort((a, b) => {
@@ -108,7 +107,6 @@ buscar.addEventListener("keydown", (e) => {
 
     pesquisar(buscar);
   }
-  // console.log(buscar);
 });
 
 function pesquisar(buscar) {
@@ -124,3 +122,5 @@ function pesquisar(buscar) {
     document.querySelector(".result").innerHTML = "Contato não encontrado";
   }
 }
+
+buscarContatos.addEventListener("click", criarListaDeContatos);

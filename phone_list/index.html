@@ -14,22 +14,66 @@
       }
 
       body {
+        height: 100vh;
         margin: 1rem;
         background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
       }
 
       form {
+        display: grid;
         padding: 1rem;
+        justify-items: center;
+      }
+
+      form div {
+        width: 100%;
+        margin-bottom: 10px;
       }
 
       ul {
+        width: 20rem;
         height: 10rem;
         margin-top: 1.5rem;
         overflow-y: scroll;
       }
 
+      form label {
+        color: teal;
+      }
+
+      form input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: none;
+      }
+
+      form > #salvar,
+      button {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: none;
+        color: teal;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 10px;
+      }
+
+      #salvar:hover,
+      button:hover {
+        background-color: lightgray;
+      }
+
       #pesquisar {
-        margin-top: 2rem;
+        margin-top: 1rem;
+        border: none;
+        padding: 8px;
+        border-radius: 4px;
       }
 
       .result {
@@ -42,13 +86,19 @@
     <h2>Lista Telefônica</h2>
 
     <form action="">
-      <label for="">Nome</label>
-      <input type="text" name="nome" id="nome" />
-      <label for="">Telefone</label>
-      <input type="tel" name="tel" id="telefone" />
-      <input type="submit" value="Salvar" />
-
+      <div>
+        <label for="">Nome:</label>
+        <input type="text" name="nome" id="nome" />
+      </div>
+      <div>
+        <label for="">Telefone:</label>
+        <input type="tel" name="tel" id="telefone" />
+      </div>
       <p></p>
+
+      <input type="submit" value="Salvar" id="salvar" />
+
+      <button id="meusContatos">Meus contatos</button>
     </form>
 
     <label for="">Pesquisar Contato:</label>
