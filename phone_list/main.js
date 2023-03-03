@@ -18,6 +18,7 @@ form.addEventListener("submit", (event) => {
   let tel = document.getElementById("telefone").value;
 
   if (!nome || !tel != "") {
+    p.setAttribute("style", "color: red; margin-top: 1rem");
     p.innerHTML = "Preencha os campos";
     return;
   }
@@ -31,32 +32,24 @@ form.addEventListener("submit", (event) => {
   });
 
   if (contatosSalvos.includes(tel) || contatosSalvos.includes(nome)) {
+    p.setAttribute("style", "color: red; margin-top: 1rem");
     p.innerHTML = "Este número ou nome já foram salvos";
     return;
   }
 
   contatos.push(novoContato);
+  p.setAttribute("style", "color: green; margin-top: 1rem");
+  p.innerHTML = "Contato Salvo";
+
+  nome = "";
+  tel = "";
 
   localStorage.setItem("meusContatos", JSON.stringify(contatos));
 
   // localStorage.clear();
 });
+
 criarListaDeContatos();
-
-// function adcionar(nome, tel) {
-//   if (nome && tel != "") {
-//     return (p.innerHTML = "Digite apenas números válidos no campo número");
-//   }
-
-// }
-
-const letra = "roberto";
-// pegando a primeira letra da string
-if (letra.substring(-1, 1) == "a") {
-  // console.log("essa letra A");
-} else {
-  // console.log("essa letra não é A");
-}
 
 function ordemAlfabetica() {
   contatos.sort((a, b) => {
@@ -71,28 +64,33 @@ function ordemAlfabetica() {
 function criarListaDeContatos() {
   ordemAlfabetica();
 
+  let listaAlfabetica = contatos.map((contato) => {
+    criarLista(contato);
+  });
+
+  return listaAlfabetica;
+}
+
+function criarLista(contato) {
   const body = document.querySelector("body");
   const ul = document.querySelector("ul");
 
   body.appendChild(ul);
+  let li = document.createElement("li");
+  const span = document.createElement("span");
 
-  contatos.forEach((contato) => {
-    const li = document.createElement("li");
-    const span = document.createElement("span");
+  li.setAttribute(
+    "style",
+    "text-transform: uppercase; display: flex; justify-content: space-between; margin-bottom: 10px"
+  );
+  li.style.textTransform = "uppercase";
+  li.innerHTML = contato.nome;
 
-    li.setAttribute(
-      "style",
-      "text-transform: uppercase; display: flex; justify-content: space-between; margin-bottom: 10px"
-    );
-    li.style.textTransform = "uppercase";
-    li.innerHTML = contato.nome;
+  span.setAttribute("style", "color: blue;");
+  span.innerHTML = contato.telefone;
 
-    span.setAttribute("style", "color: blue;");
-    span.innerHTML = contato.telefone;
-
-    ul.appendChild(li);
-    li.appendChild(span);
-  });
+  li.appendChild(span);
+  ul.appendChild(li);
 }
 
 let buscar = document.getElementById("pesquisar");
@@ -100,28 +98,29 @@ let buscar = document.getElementById("pesquisar");
 buscar.addEventListener("keydown", (e) => {
   buscar = e.target.value;
 
-  pesquisar(contatos, buscar);
+  if (buscar) {
+    let resultadoDaFuncao = criarListaDeContatos();
 
-  console.log(buscar);
+    resultadoDaFuncao = resultadoDaFuncao = [];
+    const ul = document.querySelector("ul");
+
+    ul.innerHTML = resultadoDaFuncao;
+
+    pesquisar(buscar);
+  }
+  // console.log(buscar);
 });
 
-function pesquisar(contatos, buscar) {
-  const filtro = contatos.filter((item) => item.nome.includes(buscar));
-  console.log(filtro);
+function pesquisar(buscar) {
+  document.querySelector(".result").innerHTML = "";
 
-  if (filtro) {
-    const ul = document.createElement("ul");
-    const body = document.querySelector("body");
+  let filtro = contatos.filter((item) => item.nome.includes(buscar));
 
-    body.appendChild(ul);
-
-    const li = document.createElement("li");
-    li.style.color = "red";
-
-    li.innerHTML = filtro;
-
-    ul.appendChild(li);
+  if (filtro.length > 0) {
+    filtro.map((item) => {
+      criarLista(item);
+    });
+  } else {
+    document.querySelector(".result").innerHTML = "Contato não encontrado";
   }
-
-  // novaLista(filtro);
 }
